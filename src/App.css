@@ -2,7 +2,7 @@
 html, body {
     margin: 0;
     height: 100%;
-    overflow: hidden
+    overflow: hidden;
 }
 
 * {
@@ -26,8 +26,7 @@ html, body {
     left: 0;
     top: 0;
     height: 100vh;
-    width: 30vw;
-    max-width: 400px;
+    width: 408px;
     background: #f0f0f0;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     transition: transform 0.4s;
@@ -35,20 +34,24 @@ html, body {
 
 .show {
     transform: translate3d(0vw, 0, 0);
-    overflow: hidden;
 }
 
 .hide {
-    transform: translate3d(-100vw, 0, 0);
+    transform: translate3d(-410px, 0, 0);
 }
 
 .panel-content .panel-main {
-    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5rem;
 }
 
 .panel-content .panel-top {
     height: 48px;
+    width: 100%;
     background: white;
+    display: block;
+    float: left;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(0, 0, 0, 0.02);
 }
 
@@ -87,6 +90,56 @@ html, body {
     text-align: left;
 }
 
-.app-icon {
-    padding: 1rem;
+.searchbar-input {
+    font-size: 1rem;
+    border: none;
+    outline: none;
 }
+
+.search-result-grid {
+    list-style-type: none;
+    width: 100%;
+    max-height: 600px;
+    padding: 0;
+    margin-top: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(0, 0, 0, 0.02);
+}
+
+.search-result-grid ol {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    list-style-type: none;
+}
+
+.search-result-grid li {
+    max-width: 100%;
+    background: white;
+    text-align: left;
+    padding: 1rem;
+    cursor: pointer;
+    border-top: .5px solid #f0f0f0;
+}
+
+.search-result-grid li:first-child {
+    border-top: none;
+}
+
+.search-result-grid li:hover {
+    background: #f0f0f0;
+}
+
+.search-result-grid li p {
+    margin: 0;
+    padding: 0;
+}
+
+.common-icon {
+    padding: 1rem;
+    color: #696969;
+}
+

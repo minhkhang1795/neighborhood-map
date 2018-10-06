@@ -1,22 +1,21 @@
 import React from "react"
-import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import {compose, withProps} from "recompose"
+import {withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps"
 
 const MapComponent = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCx7CZ1P0YdqirwlJ4jPdrMO20NQwSPkbI&v=3.exp&libraries=geometry,drawing,places",
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `100%` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
+    loadingElement: <div style={{height: `100%`}}/>,
+    containerElement: <div style={{height: `100%`}}/>,
+    mapElement: <div style={{height: `100%`}}/>,
   }),
   withScriptjs,
   withGoogleMap
 )((props) =>
   <GoogleMap
     defaultZoom={8}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
-  >
-    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} onClick={props.onMarkerClick} />}
+    defaultCenter={{lat: -34.397, lng: 150.644}}>
+    {props.isMarkerShown && <Marker position={{lat: -34.397, lng: 150.644}} onClick={props.onMarkerClick}/>}
   </GoogleMap>
 )
 
@@ -28,12 +27,12 @@ class MyMapComponent extends React.PureComponent {
 
   delayedShowMarker = () => {
     setTimeout(() => {
-      this.setState({ isMarkerShown: true })
+      this.setState({isMarkerShown: true})
     }, 3000)
   }
 
   handleMarkerClick = () => {
-    this.setState({ isMarkerShown: false })
+    this.setState({isMarkerShown: false})
     this.delayedShowMarker()
   }
 
