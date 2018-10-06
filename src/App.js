@@ -30,6 +30,23 @@ class App extends Component {
     });
   }
 
+  fetchAndUpdateVenueDetails(id) {
+    const ctx =this;
+    let places = ctx.state.places;
+    let index = places.findIndex(place => place.venue.id === id);
+
+    if (index >= 0 && !places[index].venue.updated) {
+      PlaceAPI.getDetails(id).then((venue) => {
+        console.log(venue);
+        places[index].venue = venue;
+        places[index].venue.updated = true; // Flag to indicate that this venue is already fetched
+        ctx.setState({places: places});
+      }).catch((e) => {
+        console.log(e)
+      });
+    }
+  }
+
   render() {
     const {places, query} = this.state;
 
@@ -44,9 +61,12 @@ class App extends Component {
     return (
       <div>
         <div className="map-container">
-          <MyMapComponent places={showingPlaces} ll={{lat: lat, lng: lng}} isMarkerShown={true}/>
+          <MyMapComponent onFetchVenueDetail={(id) => this.fetchAndUpdateVenueDetails(id)} places={showingPlaces} ll={{lat: lat, lng: lng}} isMarkerShown={true}/>
         </div>
-        <PanelComponent places={showingPlaces} query={this.props.query} onQueryChange={(e) => this.updateQuery(e.target.value)}/>
+        <PanelComponent places={showingPlaces}
+                        query={this.props.query}
+                        onQueryChange={(e) => this.updateQuery(e.target.value)}
+                        onFetchVenueDetail={(id) => this.fetchAndUpdateVenueDetails(id)}/>
       </div>
     );
   }

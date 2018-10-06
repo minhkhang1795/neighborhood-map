@@ -17,7 +17,7 @@ const MapComponent = compose(
     defaultCenter={props.ll}>
     {props.isMarkerShown && props.places.constructor === Array && props.places.map((place) =>
       <Marker key={place.venue.id} position={{lat: place.venue.location.lat, lng: place.venue.location.lng}}
-              onClick={props.onMarkerClick}/>)}
+              onClick={() => props.onMarkerClick(place.venue.id)}/>)}
   </GoogleMap>
 );
 
@@ -44,7 +44,7 @@ class MyMapComponent extends React.PureComponent {
         places={this.props.places}
         ll={this.props.ll}
         isMarkerShown={this.props.isMarkerShown}
-        onMarkerClick={this.handleMarkerClick}
+        onMarkerClick={(id) => this.props.onFetchVenueDetail(id)}
       />
     )
   }
