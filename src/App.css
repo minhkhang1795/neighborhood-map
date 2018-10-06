@@ -97,22 +97,27 @@ html, body {
     outline: none;
 }
 
+.filter-no-result {
+    margin: 1rem auto 1rem auto;
+}
+
 .search-result-grid {
-    list-style-type: none;
     width: 100%;
     height: calc(100vh - 124px);
     padding: 0;
     margin-top: .5rem;
     display: flex;
     flex-wrap: wrap;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(0, 0, 0, 0.02);
 }
 
 .search-result-grid ol {
     padding: 0;
     margin: 0;
+    height: fit-content;
+    max-height: calc(100vh - 124px);
     width: 100%;
     overflow: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(0, 0, 0, 0.02);
     -webkit-overflow-scrolling: touch;
     list-style-type: none;
 }

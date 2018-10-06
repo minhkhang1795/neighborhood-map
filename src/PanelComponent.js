@@ -30,6 +30,7 @@ class PanelComponent extends Component {
         <div className={'panel-content ' + this.state.visibility}>
           <div id={'panel'} className="panel-main">
             <SearchBar query={this.props.query} onQueryChange={(e) => this.props.onQueryChange(e)}/>
+            {this.props.places.length === 0 && <p className="filter-no-result">No results found.</p>}
             <SearchResult places={this.props.places}/>
           </div>
 
