@@ -91,6 +91,7 @@ html, body {
 }
 
 .searchbar-input {
+    width: 80%;
     font-size: 1rem;
     border: none;
     outline: none;
@@ -99,7 +100,7 @@ html, body {
 .search-result-grid {
     list-style-type: none;
     width: 100%;
-    max-height: 600px;
+    height: calc(100vh - 124px);
     padding: 0;
     margin-top: .5rem;
     display: flex;
