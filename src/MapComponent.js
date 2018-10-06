@@ -13,9 +13,11 @@ const MapComponent = compose(
   withGoogleMap
 )((props) =>
   <GoogleMap
-    defaultZoom={14}
-    defaultCenter={{lat: 42.3784207, lng: -71.1304621}}>
-    {props.isMarkerShown && <Marker position={{lat: 42.3784207, lng: -71.1304621}} onClick={props.onMarkerClick}/>}
+    defaultZoom={15}
+    defaultCenter={props.ll}>
+    {props.isMarkerShown && props.places.constructor === Array && props.places.map((place) =>
+      <Marker key={place.venue.id} position={{lat: place.venue.location.lat, lng: place.venue.location.lng}}
+              onClick={props.onMarkerClick}/>)}
   </GoogleMap>
 );
 
@@ -40,6 +42,7 @@ class MyMapComponent extends React.PureComponent {
     return (
       <MapComponent
         places={this.props.places}
+        ll={this.props.ll}
         isMarkerShown={this.props.isMarkerShown}
         onMarkerClick={this.handleMarkerClick}
       />

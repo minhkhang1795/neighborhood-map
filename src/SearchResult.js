@@ -8,7 +8,7 @@ class SearchResult extends Component {
       <div className="search-result-grid">
         <ol>
           {places && places.constructor === Array && places.map((place) =>
-            <li>{ place.venue.name }</li>
+            <li key={place.venue.id}>{place.venue.name}</li>
           )}
         </ol>
       </div>

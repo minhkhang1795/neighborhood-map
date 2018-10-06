@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <div>
         <div className="map-container">
-          <MyMapComponent places={this.state.places} isMarkerShown={true}/>
+          <MyMapComponent places={this.state.places} ll={{lat: lat, lng: lng}} isMarkerShown={true}/>
         </div>
         <PanelComponent places={this.state.places}/>
       </div>
