@@ -2,26 +2,14 @@ import React, {Component} from 'react';
 
 class SearchResult extends Component {
   render() {
+    const {places} = this.props;
+
     return (
       <div className="search-result-grid">
         <ol>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa Result 1 adwad awd awda d wa Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-          <li><p>Result 1 adwad awd awda d wa</p></li>
-
-
+          {places && places.constructor === Array && places.map((place) =>
+            <li>{ place.venue.name }</li>
+          )}
         </ol>
       </div>
     )

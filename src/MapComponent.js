@@ -15,9 +15,9 @@ const MapComponent = compose(
   <GoogleMap
     defaultZoom={14}
     defaultCenter={{lat: 42.3784207, lng: -71.1304621}}>
-    {props.isMarkerShown && <Marker position={{lat: -34.397, lng: 150.644}} onClick={props.onMarkerClick}/>}
+    {props.isMarkerShown && <Marker position={{lat: 42.3784207, lng: -71.1304621}} onClick={props.onMarkerClick}/>}
   </GoogleMap>
-)
+);
 
 class MyMapComponent extends React.PureComponent {
 
@@ -29,16 +29,17 @@ class MyMapComponent extends React.PureComponent {
     setTimeout(() => {
       this.setState({isMarkerShown: true})
     }, 3000)
-  }
+  };
 
   handleMarkerClick = () => {
-    this.setState({isMarkerShown: false})
+    this.setState({isMarkerShown: false});
     this.delayedShowMarker()
-  }
+  };
 
   render() {
     return (
       <MapComponent
+        places={this.props.places}
         isMarkerShown={this.props.isMarkerShown}
         onMarkerClick={this.handleMarkerClick}
       />

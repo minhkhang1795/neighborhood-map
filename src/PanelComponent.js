@@ -30,7 +30,7 @@ class PanelComponent extends Component {
         <div className={'panel-content ' + this.state.visibility}>
           <div id={'panel'} className="panel-main">
             <SearchBar/>
-            <SearchResult/>
+            <SearchResult places={this.props.places}/>
           </div>
 
           {/* Close button to hide the panel */}
