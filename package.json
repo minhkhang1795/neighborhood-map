@@ -12,7 +12,8 @@
     "react-google-maps": "^9.4.5",
     "react-router-dom": "^4.3.1",
     "recompose": "latest",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "escape-string-regexp": "latest"
   },
   "devDependencies": {
     "react-scripts": "2.0.4"

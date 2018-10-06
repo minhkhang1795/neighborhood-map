@@ -29,7 +29,7 @@ class PanelComponent extends Component {
         {/* Search bar and result list go here*/}
         <div className={'panel-content ' + this.state.visibility}>
           <div id={'panel'} className="panel-main">
-            <SearchBar/>
+            <SearchBar query={this.props.query} onQueryChange={(e) => this.props.onQueryChange(e)}/>
             <SearchResult places={this.props.places}/>
           </div>
 
