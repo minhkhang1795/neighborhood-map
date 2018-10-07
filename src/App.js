@@ -46,7 +46,7 @@ class App extends Component {
     const ctx = this;
     PlaceAPI.getDetails(id).then((venue) => {
       console.log(venue);
-      if (venue) {
+      if (venue && venue.location) {
         places[index].venue = venue;
         places[index].venue.updated = true; // Flag to indicate that this venue is already fetched
         ctx.setState({places: places, focusedPlace: venue});
