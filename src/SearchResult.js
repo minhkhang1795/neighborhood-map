@@ -1,14 +1,24 @@
 import React, {Component} from 'react';
 
 class SearchResult extends Component {
+
+  handleOnKeyPressed = function(e, place) {
+    if (e.key === "Enter")
+      this.props.onUpdateFocusedPlace(place.venue.id);
+  };
+
   render() {
     const {places} = this.props;
 
     return (
       <div className="search-result-grid">
-        <ol>
+        <ol tabIndex={this.props.isHidden ? -1 : 0}>
           {places && places.constructor === Array && places.map((place) =>
-            <li key={place.venue.id} onClick={() => this.props.onUpdateFocusedPlace(place.venue.id)}>{place.venue.name}</li>
+            <li tabIndex={this.props.isHidden ? -1 : 0}
+                key={place.venue.id}
+                onClick={() => this.props.onUpdateFocusedPlace(place.venue.id)}
+                onKeyPress={(e) => this.handleOnKeyPressed(e, place)}
+            >{place.venue.name}</li>
           )}
         </ol>
       </div>

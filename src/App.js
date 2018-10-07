@@ -34,12 +34,10 @@ class App extends Component {
   updateFocusedPlace(id) {
     let places = this.state.places;
     const index = places.findIndex(place => place.venue.id === id);
-    console.log(index);
     if (index >= 0) {
-      this.setState({focusedPlace: places[index]});
-      console.log(this.state.focusedPlace);
+      this.setState({focusedPlace: places[index].venue});
       if (!places[index].venue.updated) {
-        // this.fetchFocusedPlaceDetail(id, index, places);
+        this.fetchFocusedPlaceDetail(id, index, places);
       }
     }
   }
@@ -48,12 +46,18 @@ class App extends Component {
     const ctx = this;
     PlaceAPI.getDetails(id).then((venue) => {
       console.log(venue);
-      places[index].venue = venue;
-      places[index].venue.updated = true; // Flag to indicate that this venue is already fetched
-      ctx.setState({places: places});
+      if (venue) {
+        places[index].venue = venue;
+        places[index].venue.updated = true; // Flag to indicate that this venue is already fetched
+        ctx.setState({places: places, focusedPlace: venue});
+      }
     }).catch((e) => {
       console.log(e)
     });
+  }
+
+  clearFocusedPlace() {
+    this.setState({focusedPlace: null});
   }
 
   render() {
@@ -74,7 +78,8 @@ class App extends Component {
                           isMarkerShown={true}
                           onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}
                           places={showingPlaces}
-                          focusedPlace={focusedPlace}/>
+                          focusedPlace={focusedPlace}
+                          clearFocusedPlace={() => this.clearFocusedPlace()}/>
         </div>
         <PanelComponent places={showingPlaces}
                         query={query}
