@@ -12,6 +12,7 @@ class App extends Component {
 
   state = {
     places: [],
+    focusedPlace: null,
     query: ''
   };
 
@@ -30,28 +31,36 @@ class App extends Component {
     });
   }
 
-  fetchAndUpdateVenueDetails(id) {
-    const ctx =this;
-    let places = ctx.state.places;
-    let index = places.findIndex(place => place.venue.id === id);
-
-    if (index >= 0 && !places[index].venue.updated) {
-      PlaceAPI.getDetails(id).then((venue) => {
-        console.log(venue);
-        places[index].venue = venue;
-        places[index].venue.updated = true; // Flag to indicate that this venue is already fetched
-        ctx.setState({places: places});
-      }).catch((e) => {
-        console.log(e)
-      });
+  updateFocusedPlace(id) {
+    let places = this.state.places;
+    const index = places.findIndex(place => place.venue.id === id);
+    console.log(index);
+    if (index >= 0) {
+      this.setState({focusedPlace: places[index]});
+      console.log(this.state.focusedPlace);
+      if (!places[index].venue.updated) {
+        // this.fetchFocusedPlaceDetail(id, index, places);
+      }
     }
   }
 
+  fetchFocusedPlaceDetail(id, index, places) {
+    const ctx = this;
+    PlaceAPI.getDetails(id).then((venue) => {
+      console.log(venue);
+      places[index].venue = venue;
+      places[index].venue.updated = true; // Flag to indicate that this venue is already fetched
+      ctx.setState({places: places});
+    }).catch((e) => {
+      console.log(e)
+    });
+  }
+
   render() {
-    const {places, query} = this.state;
+    const {places, focusedPlace, query} = this.state;
 
     let showingPlaces;
-    if (this.state.query) {
+    if (query) {
       const match = new RegExp(escapeRegExp(query), 'i');
       showingPlaces = places.filter((place) => match.test(place.venue.name));
     } else {
@@ -61,12 +70,16 @@ class App extends Component {
     return (
       <div>
         <div className="map-container">
-          <MyMapComponent onFetchVenueDetail={(id) => this.fetchAndUpdateVenueDetails(id)} places={showingPlaces} ll={{lat: lat, lng: lng}} isMarkerShown={true}/>
+          <MyMapComponent ll={{lat: lat, lng: lng}}
+                          isMarkerShown={true}
+                          onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}
+                          places={showingPlaces}
+                          focusedPlace={focusedPlace}/>
         </div>
         <PanelComponent places={showingPlaces}
-                        query={this.props.query}
+                        query={query}
                         onQueryChange={(e) => this.updateQuery(e.target.value)}
-                        onFetchVenueDetail={(id) => this.fetchAndUpdateVenueDetails(id)}/>
+                        onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}/>
       </div>
     );
   }

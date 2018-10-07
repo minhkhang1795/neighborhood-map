@@ -8,7 +8,7 @@ class SearchResult extends Component {
       <div className="search-result-grid">
         <ol>
           {places && places.constructor === Array && places.map((place) =>
-            <li key={place.venue.id} onClick={() => this.props.onFetchVenueDetail(place.venue.id)}>{place.venue.name}</li>
+            <li key={place.venue.id} onClick={() => this.props.onUpdateFocusedPlace(place.venue.id)}>{place.venue.name}</li>
           )}
         </ol>
       </div>

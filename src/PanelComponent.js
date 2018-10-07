@@ -31,7 +31,7 @@ class PanelComponent extends Component {
           <div id={'panel'} className="panel-main">
             <SearchBar query={this.props.query} onQueryChange={(e) => this.props.onQueryChange(e)}/>
             {this.props.places.length === 0 && <p className="filter-no-result">No results found.</p>}
-            <SearchResult onFetchVenueDetail={(id) => this.props.onFetchVenueDetail(id)} places={this.props.places}/>
+            <SearchResult onUpdateFocusedPlace={(id) => this.props.onUpdateFocusedPlace(id)} places={this.props.places}/>
           </div>
 
           {/* Close button to hide the panel */}

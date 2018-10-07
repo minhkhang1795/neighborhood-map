@@ -1,6 +1,6 @@
 import React from "react"
 import {compose, withProps} from "recompose"
-import {withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps"
+import {withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow} from "react-google-maps"
 
 const MapComponent = compose(
   withProps({
@@ -15,36 +15,32 @@ const MapComponent = compose(
   <GoogleMap
     defaultZoom={15}
     defaultCenter={props.ll}>
-    {props.isMarkerShown && props.places.constructor === Array && props.places.map((place) =>
-      <Marker key={place.venue.id} position={{lat: place.venue.location.lat, lng: place.venue.location.lng}}
-              onClick={() => props.onMarkerClick(place.venue.id)}/>)}
+    {props.isMarkerShown && props.places && props.places.constructor === Array && props.places.map((place) =>
+      <Marker key={place.venue.id}
+              position={{lat: place.venue.location.lat, lng: place.venue.location.lng}}
+              onClick={() => props.onMarkerClick(place.venue.id)}>
+
+      </Marker>)}
+    {props.isMarkerShown && props.focusedPlace && props.focusedPlace.venue && props.focusedPlace.venue.location
+    && <InfoWindow position={{lat: props.focusedPlace.venue.location.lat, lng: props.focusedPlace.venue.location.lng}}
+                   onCloseClick={props.onToggleClose}>
+      <div>
+        <h3>{props.focusedPlace.venue.name}</h3>
+      </div>
+    </InfoWindow>}
   </GoogleMap>
 );
 
 class MyMapComponent extends React.PureComponent {
 
-  componentDidMount() {
-    this.delayedShowMarker()
-  }
-
-  delayedShowMarker = () => {
-    setTimeout(() => {
-      this.setState({isMarkerShown: true})
-    }, 3000)
-  };
-
-  handleMarkerClick = () => {
-    this.setState({isMarkerShown: false});
-    this.delayedShowMarker()
-  };
-
   render() {
     return (
       <MapComponent
-        places={this.props.places}
         ll={this.props.ll}
         isMarkerShown={this.props.isMarkerShown}
-        onMarkerClick={(id) => this.props.onFetchVenueDetail(id)}
+        places={this.props.places}
+        focusedPlace={this.props.focusedPlace}
+        onMarkerClick={(id) => this.props.onUpdateFocusedPlace(id)}
       />
     )
   }
