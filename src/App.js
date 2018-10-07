@@ -5,8 +5,7 @@ import MyMapComponent from "./MapComponent";
 import PanelComponent from "./PanelComponent";
 import * as PlaceAPI from './PlaceAPI'
 
-const lat = 42.3784207;
-const lng = -71.1304621;
+const lat = 42.3784207, lng = -71.1304621;
 
 class App extends Component {
 
@@ -16,12 +15,12 @@ class App extends Component {
     query: ''
   };
 
-  updateQuery(query) {
-    this.setState({query: query.trim()});
-  }
-
   componentDidMount() {
     this.getPlaces('coffee');
+  }
+
+  updateQuery(query) {
+    this.setState({query: query.trim()});
   }
 
   getPlaces(query) {
@@ -37,7 +36,7 @@ class App extends Component {
     if (index >= 0) {
       this.setState({focusedPlace: places[index].venue});
       if (!places[index].venue.updated) {
-        this.fetchFocusedPlaceDetail(id, index, places);
+        this.fetchFocusedPlaceDetail(id, index, places); // Fetch data from Foursquare
       }
     }
   }

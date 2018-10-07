@@ -16,6 +16,7 @@ const MapComponent = compose(
     defaultZoom={15}
     defaultCenter={props.ll}
     defaultOptions={DEFAULT_OPTION}>
+
     {/* Add markers based on props.places. onMarkerClick() updates focusedPlace in the parent component */}
     {props.isMarkerShown && props.places && props.places.constructor === Array && props.places.map((place) =>
       <Marker key={place.venue.id}
@@ -55,6 +56,7 @@ class MyMapComponent extends React.PureComponent {
   }
 }
 
+// Map style
 const DEFAULT_OPTION = {
   mapTypeControl: false, styles: [{
     "featureType": "administrative",
