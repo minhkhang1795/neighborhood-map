@@ -21,7 +21,8 @@ const MapComponent = compose(
     {props.isMarkerShown && props.places && props.places.constructor === Array && props.places.map((place) =>
       <Marker key={place.venue.id}
               position={{lat: place.venue.location.lat, lng: place.venue.location.lng}}
-              onClick={() => props.onMarkerClick(place.venue.id)}>
+              onClick={() => props.onMarkerClick(place.venue.id)}
+              animation={props.focusedPlace ? props.focusedPlace.id === place.venue.id ? window.google.maps.Animation.BOUNCE : null : null}>
       </Marker>)}
 
     {/* Add info window of the focused place */}

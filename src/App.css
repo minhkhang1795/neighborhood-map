@@ -13,6 +13,15 @@ html, body {
     .panel-content {
         min-width: 100vw;
     }
+
+    .info-window {
+        max-width: 150px;
+    }
+
+    .info-window img {
+        width: 150px;
+        height: 150px;
+    }
 }
 
 .map-container {
