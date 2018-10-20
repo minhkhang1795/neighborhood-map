@@ -25,6 +25,7 @@ Finally, start the development server with
 npm start
 ```
 
+Note: the service worker is included in the production build.
 
 ## Implemented functionalities
 * [x] Interface Design:
