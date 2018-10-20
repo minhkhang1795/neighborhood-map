@@ -71,8 +71,8 @@ class App extends Component {
     }
 
     return (
-      <div>
-        <div className="map-container">
+      <div role="main">
+        <div role="application" className="map-container">
           <MyMapComponent ll={{lat: lat, lng: lng}}
                           isMarkerShown={true}
                           onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}
