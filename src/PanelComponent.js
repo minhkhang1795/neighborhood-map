@@ -48,7 +48,7 @@ class PanelComponent extends Component {
 
           {/* Close button to hide the panel */}
           <div className="panel-bottom">
-            <button ref="hideButton" className="panel-hide-btn" role={'button'} onClick={(e) => this.closePanel(e)}>
+            <button ref="hideButton" className="panel-hide-btn" onClick={(e) => this.closePanel(e)}>
               <i className="fas fa-chevron-left common-icon"/> Hide
             </button>
           </div>
