@@ -82,29 +82,27 @@ class App extends Component {
 
     return (
       <div role="main">
-        <ErrorBoundary>
-          {/* Error modal */}
-          {this.state.showError && <div className="error-modal">
-            <div className="error-modal-content">
-              <span role={"button"} className="error-modal-close" onClick={() => this.onCloseErrorModal()}>&times;</span>
-              <p>Failed to fetch data from Foursquare.</p>
-            </div>
-          </div>}
-          {/* Google map */}
-          <div role="application" className="map-container">
-            <MyMapComponent ll={{lat: lat, lng: lng}}
-                            isMarkerShown={true}
-                            onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}
-                            places={showingPlaces}
-                            focusedPlace={focusedPlace}
-                            clearFocusedPlace={() => this.clearFocusedPlace()}/>
+        {/* Error modal */}
+        {this.state.showError && <div className="error-modal">
+          <div className="error-modal-content">
+            <span role={"button"} className="error-modal-close" onClick={() => this.onCloseErrorModal()}>&times;</span>
+            <p>Failed to fetch data from Foursquare.</p>
           </div>
-          {/* Search panel */}
-          <PanelComponent places={showingPlaces}
-                          query={query}
-                          onQueryChange={(e) => this.updateQuery(e.target.value)}
-                          onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}/>
-        </ErrorBoundary>
+        </div>}
+        {/* Google map */}
+        <div role="application" className="map-container">
+          <MyMapComponent ll={{lat: lat, lng: lng}}
+                          isMarkerShown={true}
+                          onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}
+                          places={showingPlaces}
+                          focusedPlace={focusedPlace}
+                          clearFocusedPlace={() => this.clearFocusedPlace()}/>
+        </div>
+        {/* Search panel */}
+        <PanelComponent places={showingPlaces}
+                        query={query}
+                        onQueryChange={(e) => this.updateQuery(e.target.value)}
+                        onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}/>
       </div>
     );
   }
