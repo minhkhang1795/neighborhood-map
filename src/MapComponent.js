@@ -23,21 +23,20 @@ const MapComponent = compose(
               position={{lat: place.venue.location.lat, lng: place.venue.location.lng}}
               onClick={() => props.onMarkerClick(place.venue.id)}
               animation={props.focusedPlace ? props.focusedPlace.id === place.venue.id ? window.google.maps.Animation.BOUNCE : null : null}>
+        {/* Add info window of the focused place */}
+        {props.focusedPlace && props.focusedPlace && props.focusedPlace.location && props.focusedPlace.id === place.venue.id &&
+        <InfoWindow position={{lat: props.focusedPlace.location.lat, lng: props.focusedPlace.location.lng}}
+                    onCloseClick={props.onToggleClose}>
+          <div className="info-window" tabIndex={0}>
+            <h3>{props.focusedPlace.name}</h3>
+            <p>{props.focusedPlace.location.formattedAddress[0] + (props.focusedPlace.location.formattedAddress[1] ?
+              ', ' + props.focusedPlace.location.formattedAddress[1] : '')}</p>
+            {props.focusedPlace.bestPhoto &&
+            <img src={props.focusedPlace.bestPhoto.prefix + `300x300` + props.focusedPlace.bestPhoto.suffix}
+                 alt={`Image of ` + props.focusedPlace.name}/>}
+          </div>
+        </InfoWindow>}
       </Marker>)}
-
-    {/* Add info window of the focused place */}
-    {props.isMarkerShown && props.focusedPlace && props.focusedPlace && props.focusedPlace.location &&
-    <InfoWindow position={{lat: props.focusedPlace.location.lat, lng: props.focusedPlace.location.lng}}
-                onCloseClick={props.onToggleClose}>
-      <div className="info-window" tabIndex={0}>
-        <h3>{props.focusedPlace.name}</h3>
-        <p>{props.focusedPlace.location.formattedAddress[0] + (props.focusedPlace.location.formattedAddress[1] ?
-          ', ' + props.focusedPlace.location.formattedAddress[1] : '')}</p>
-        {props.focusedPlace.bestPhoto &&
-        <img src={props.focusedPlace.bestPhoto.prefix + `300x300` + props.focusedPlace.bestPhoto.suffix}
-             alt={`Image of ` + props.focusedPlace.name}/>}
-      </div>
-    </InfoWindow>}
   </GoogleMap>
 );
 

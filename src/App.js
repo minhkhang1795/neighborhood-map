@@ -18,22 +18,20 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.getPlaces('coffee');
+    this.fetchPlaces('coffee');
   }
 
   updateQuery(query) {
     this.setState({query: query.trim()});
   }
 
-  getPlaces(query) {
+  fetchPlaces(query) {
     PlaceAPI.explore(lat, lng, query).then((places) => {
-      console.log(places);
       if (places) {
         this.setState({places: places, showError: false});
       } else
         this.setState({showError: true});
     }).catch((e) => {
-      console.log(e);
       this.setState({showError: true});
     });
   }
@@ -52,7 +50,6 @@ class App extends Component {
   fetchFocusedPlaceDetail(id, index, places) {
     const ctx = this;
     PlaceAPI.getDetails(id).then((venue) => {
-      console.log(venue);
       if (venue && venue.location) {
         places[index].venue = venue;
         places[index].venue.updated = true; // Flag to indicate that this venue is already fetched
@@ -60,7 +57,6 @@ class App extends Component {
       } else
         this.setState({showError: true});
     }).catch((e) => {
-      console.log(e);
       this.setState({showError: true});
     });
   }
