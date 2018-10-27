@@ -15,12 +15,13 @@ class SearchResult extends Component {
 
     return (
       <div className="search-result-grid">
-        <ol tabIndex={this.props.isHidden ? -1 : 0}>
+        <ol tabIndex={this.props.isHidden ? -1 : 0} role={"list"}>
           {places && places.constructor === Array && places.map((place) =>
             <li tabIndex={this.props.isHidden ? -1 : 0}
                 key={place.venue.id}
                 onClick={() => this.props.onUpdateFocusedPlace(place.venue.id)}
                 onKeyPress={(e) => this.handleOnKeyPressed(e, place)}
+                role={"listitem"}
             >{place.venue.name}</li>
           )}
         </ol>

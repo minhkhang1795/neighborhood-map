@@ -106,10 +106,12 @@ class App extends Component {
           </ErrorBoundary>
         </div>
         {/* Search panel */}
-        <PanelComponent places={showingPlaces}
-                        query={query}
-                        onQueryChange={(e) => this.updateQuery(e.target.value)}
-                        onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}/>
+        <aside>
+          <PanelComponent places={showingPlaces}
+                          query={query}
+                          onQueryChange={(e) => this.updateQuery(e.target.value)}
+                          onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}/>
+        </aside>
       </div>
     );
   }
