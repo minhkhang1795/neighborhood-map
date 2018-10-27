@@ -8,6 +8,10 @@ import * as PlaceAPI from './PlaceAPI'
 
 const lat = 42.3784207, lng = -71.1304621;
 
+window.gm_authFailure = () => {
+  alert("Cannot connect to Google Maps service.")
+};
+
 class App extends Component {
 
   state = {
@@ -86,17 +90,20 @@ class App extends Component {
         {this.state.showError && <div className="error-modal">
           <div className="error-modal-content">
             <span role={"button"} className="error-modal-close" onClick={() => this.onCloseErrorModal()}>&times;</span>
-            <p>Failed to fetch data from Foursquare.</p>
+            <p>Failed to fetch data from Foursquare!</p>
           </div>
         </div>}
+
         {/* Google map */}
         <div role="application" className="map-container">
-          <MyMapComponent ll={{lat: lat, lng: lng}}
-                          isMarkerShown={true}
-                          onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}
-                          places={showingPlaces}
-                          focusedPlace={focusedPlace}
-                          clearFocusedPlace={() => this.clearFocusedPlace()}/>
+          <ErrorBoundary>
+            <MyMapComponent ll={{lat: lat, lng: lng}}
+                            isMarkerShown={true}
+                            onUpdateFocusedPlace={(id) => this.updateFocusedPlace(id)}
+                            places={showingPlaces}
+                            focusedPlace={focusedPlace}
+                            clearFocusedPlace={() => this.clearFocusedPlace()}/>
+          </ErrorBoundary>
         </div>
         {/* Search panel */}
         <PanelComponent places={showingPlaces}
